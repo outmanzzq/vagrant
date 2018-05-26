@@ -51,3 +51,6 @@ build-iPhoneSimulator/
 
 # MacOS
 .DS_Store
+
+# vagrant
+.vagrant
