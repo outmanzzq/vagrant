@@ -1,0 +1,29 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "centos/6"
+
+  # 定义VS1-master
+  config.vm.define "vs-master" do |vs|
+    vs.vm.network "private_network", ip: "192.168.4.50"
+    vs.vm.hostname = "vs-master"
+    vs.vm.provision "shell", inline: "sudo bash /vagrant/scripts/vs-master.sh"
+  end
+
+  # 定义VS2-backup
+  config.vm.define "vs-backup" do |vs|
+    vs.vm.network "private_network", ip: "192.168.4.55"
+    vs.vm.hostname = "vs-backup"
+    vs.vm.provision "shell", inline: "sudo bash /vagrant/scripts/vs-backup.sh"
+  end
+  # 定义RS1-web
+  config.vm.define "rs-web1" do |rs1|
+    rs1.vm.network "private_network", ip: "192.168.4.51"
+    rs1.vm.hostname = "rs-web1"
+    rs1.vm.provision "shell", inline: "sudo bash /vagrant/scripts/rs1.sh"
+  end
+  # 定义RS2-web
+  config.vm.define "rs-web2" do |rs2|
+    rs2.vm.network "private_network", ip: "192.168.4.52"
+    rs2.vm.hostname = "rs-web2"
+    rs2.vm.provision "shell", inline: "sudo bash /vagrant/scripts/rs2.sh"
+  end
+end
